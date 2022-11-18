@@ -9,7 +9,7 @@ export type ApplicationErrorConfig<T> = {
   }
   
   export class ApplicationError<T> extends Error {
-    statusCode: number
+    statusCode: undefined
     constructor(
       public config: ApplicationErrorConfig<T>
     ) {

@@ -1,8 +1,8 @@
 import cors from "cors";
-import errorHandlerMiddleware from "./src/shared/errors/error-handler";
-import routes from "./src/shared/infra/http/routes";
 import express from "express";
 import pg from "pg";
+import errorHandlerMiddleware from "./shared/errors/error-handler";
+import routes from "./shared/infra/http/routes";
 
 const pool = new pg.Pool()
 const app = express();
@@ -10,7 +10,7 @@ const port = process.env.PORT || 3333;
 
 app.use(cors());
 app.use(express.json());
-app.use(routes);
+app.use(routess);
 app.use(errorHandlerMiddleware)
 
 app.get("/", async (req, res) => {
