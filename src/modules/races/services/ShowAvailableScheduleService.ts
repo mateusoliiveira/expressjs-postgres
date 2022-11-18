@@ -1,13 +1,24 @@
 import { JSDOM } from 'jsdom';
+import pg from "pg";
 import FetchRaceService from "./FetchRaceService";
 import { IShowAvailableScheduleLink } from "../domain/models/IShowAvailableScheduleLink";
 import RedisCache from '../../../shared/RedisCache';
 
 export default class ShowAvailableScheduleService {
   public async execute({ link }: IShowAvailableScheduleLink): Promise<any> {
-    // const redisCache = new RedisCache();
-    // let weekDaysContentFETCH = await redisCache.recover<any[]>(`races-LIST-${link}`)
-    // if (!weekDaysContentFETCH) {
+    return link
+    const pool = new pg.Pool()
+    const { rows } = await pool.query(`
+    SELECT 
+      id
+    FROM 
+      races 
+    WHERE 
+      weekend_start = ${''}
+    AND
+      weekend_end = ${''}
+    ;
+    `);
     const fetch = new FetchRaceService()
     try {
       const getHTML = await fetch.execute({ link })
@@ -78,10 +89,7 @@ export default class ShowAvailableScheduleService {
             }]
         }
       }
-      // await redisCache.save(`races-LIST-${link}`, weekDaysContentREDIS)
       return weekDaysContentREDIS
-      // }
-      // return weekDaysContentFETCH
     } catch (error) {
       return { error: 'Não encontrado' }
     }

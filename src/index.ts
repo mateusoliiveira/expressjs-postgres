@@ -1,10 +1,8 @@
 import cors from "cors";
 import express from "express";
-import pg from "pg";
 import RacesController from "./modules/races/infra/http/controllers/RacesController";
 import errorHandlerMiddleware from "./shared/errors/error-handler";
 
-const pool = new pg.Pool()
 const app = express();
 const port = process.env.PORT || 3333;
 
@@ -14,7 +12,6 @@ const racesController = new RacesController();
 
 app
   .get("/", async (req, res) => {
-  const { rows } = await pool.query("SELECT NOW()");
   res.send(`DB is on and the time of it is ${rows[0].now}`);
 });
 
