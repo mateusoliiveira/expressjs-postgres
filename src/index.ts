@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import pg from "pg";
+import RacesController from "./modules/races/infra/http/controllers/RacesController";
 import errorHandlerMiddleware from "./shared/errors/error-handler";
 
 const pool = new pg.Pool()
@@ -16,10 +17,12 @@ app
   const { rows } = await pool.query("SELECT NOW()");
   res.send(`DB is on and the time of it is ${rows[0].now}`);
 });
+
 app
   .get('/test', (req, res) => {
   res.send({ greeting: 'Hello, world!' });
 })
+
 app
   .get(
     '/schedule',
