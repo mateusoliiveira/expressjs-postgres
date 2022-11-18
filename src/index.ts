@@ -10,7 +10,7 @@ const port = process.env.PORT || 3333;
 
 app.use(cors());
 app.use(express.json());
-app.use(routess);
+app.use(routes);
 app.use(errorHandlerMiddleware)
 
 app.get("/", async (req, res) => {
