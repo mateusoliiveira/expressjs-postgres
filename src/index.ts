@@ -1,4 +1,6 @@
-import bodyParser from "body-parser";
+import cors from "cors";
+import errorHandlerMiddleware from "./src/shared/errors/error-handler";
+import routes from "./src/shared/infra/http/routes";
 import express from "express";
 import pg from "pg";
 
